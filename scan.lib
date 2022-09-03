@@ -1,0 +1,17 @@
+#!/bin/bash
+
+nmap_scan(){
+nmap -sS $DOMAIN > $DIRECTORY/nmap
+echo "The results of the nmap scan are stored in $DIRECTORY/nmap."
+}
+
+dirsearch_scan(){
+mkdir $DIRECTORY/dirsearch && touch $DIRECTORY/dirsearch/dirsearch.txt
+DIRSEARCH_OUTPUT=/home/nbai22/Desktop/$DIRECTORY/dirsearch/dirsearch.txt
+dirsearch -u $DOMAIN -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt --form>echo "The results from the dirsearch scan are stored in $DIRECTORY/dirsearch."
+}
+
+crt_scan(){
+curl "https://crt.sh/?q=$DOMAIN&output=json" -o $DIRECTORY/crt
+echo "The results of the cert parsing is stored in $DIRECTORY/crt."
+}
